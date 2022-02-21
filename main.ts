@@ -14,16 +14,20 @@ radio.onReceivedString(function (receivedString) {
     if (receivedString == "eskuina") {
         DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CW, 30)
         DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, 150)
+        basic.showIcon(IconNames.Asleep)
     }
     if (receivedString == "ezkerra") {
         DFRobotMaqueenPlus.mototRun(Motors.M2, Dir.CW, 150)
         DFRobotMaqueenPlus.mototRun(Motors.M1, Dir.CW, 30)
+        basic.showIcon(IconNames.Asleep)
     }
     if (receivedString == "aurrera") {
         DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CW, 170)
+        basic.showIcon(IconNames.Happy)
     }
     if (receivedString == "atzera") {
         DFRobotMaqueenPlus.mototRun(Motors.ALL, Dir.CCW, 150)
+        basic.showIcon(IconNames.Sad)
     }
     if (receivedString == "ezkint") {
         eskinterm()
@@ -45,21 +49,3 @@ function eskinterm () {
     basic.pause(200)
 }
 radio.setGroup(1)
-basic.forever(function () {
-    if (input.acceleration(Dimension.X) > 200) {
-        radio.sendString("eskuina")
-        basic.showArrow(ArrowNames.East)
-    }
-    if (input.acceleration(Dimension.X) < -200) {
-        radio.sendString("ezkerra")
-        basic.showArrow(ArrowNames.West)
-    }
-    if (input.acceleration(Dimension.Y) < -200) {
-        radio.sendString("aurrera")
-        basic.showArrow(ArrowNames.North)
-    }
-    if (input.acceleration(Dimension.Y) > 200) {
-        radio.sendString("atzera")
-        basic.showArrow(ArrowNames.South)
-    }
-})
